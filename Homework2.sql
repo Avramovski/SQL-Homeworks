@@ -18,27 +18,13 @@ UNION
 SELECT [LastName] FROM [dbo].[Teacher]
 GO
 
+ALTER TABLE [dbo].[Course]
+ADD CONSTRAINT [FK_Course_Student]
+FOREIGN KEY([ID])
+REFERENCES[dbo].[Student](ID)
 
-CREATE TABLE [GROUP] (
-   GroupId int NOT NULL PRIMARY KEY,
-    Name nvarchar(255) NOT NULL,
-    Academy nvarchar(255)
-);
-ALTER TABLE Student
-ADD GroupId int 
-FOREIGN KEY (GroupId) REFERENCES [Group](GroupId);
-
-SELECT * FROM Student
-
---nezanm--
-SELECT 
-    [dbo].[Course].[Name], 
-   [dbo].[AchievementType].[Name]
-FROM 
-    [Course].[Name] AS c
+SELECT * FROM [dbo].[Course] c
 CROSS JOIN 
-    [AchievementType] AS a;
+[dbo].[AchievementType] a
 
-
-	SELECT * FROM[dbo].[Teacher]
-	WHERE Grade = null
+SELECT * FROM [dbo].Grade WHERE TeacherID is not NULL AND (Grade is NULL OR Grade = 0)
